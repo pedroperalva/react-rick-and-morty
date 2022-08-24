@@ -1,0 +1,28 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/background.jpeg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.logo {
+  width: 700px;
+}
+.cardsContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 20px;
+}
+.btnContainer {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 50px;
+}
+p {
+  font-family: "DynaPuff", cursive;
+}

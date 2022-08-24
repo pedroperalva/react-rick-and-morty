@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# React - Rick and Morty
 
 This project is a training of React, using [Rick and Morty API](https://rickandmortyapi.com/).
 

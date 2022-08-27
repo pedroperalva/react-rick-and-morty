@@ -1,10 +1,16 @@
 import styles from "./Home.module.scss";
 import React, { useEffect } from "react";
-import { getCharactersList } from "../store/actions/index";
+import {
+  getCharactersList,
+  changeInput,
+  getCharactersByName,
+} from "../store/actions/index";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import CharactersCard from "../components/CharactersCard/CharactersCard";
 import Button from "../components/Button/Button";
+import Input from "../components/Input/Input";
+import useWindowDimensions from "../composables/useWindowDimensions";
 
 function Home(props) {
   useEffect(() => {
@@ -12,14 +18,26 @@ function Home(props) {
     // eslint-disable-next-line
   }, []);
 
+  const { width } = useWindowDimensions();
+
   const handleNextPage = () => {
+    console.log(props.next);
     const path = props.next.split("/");
+    console.log(path);
     props.getCharactersList(path[path.length - 1]);
   };
 
   const handlePrevPage = () => {
     const path = props.prev.split("/");
     props.getCharactersList(path[path.length - 1]);
+  };
+
+  const handleInput = (e) => {
+    props.changeInput(e.target.value);
+  };
+
+  const handleSearch = () => {
+    props.getCharactersByName();
   };
 
   return (
@@ -29,16 +47,32 @@ function Home(props) {
         alt="logo"
         className={styles.logo}
       />
-      <div className={styles.btnContainer}>
-        <Button onClickBtn={handlePrevPage} text="PREVIOUS" />
-        <Button onClickBtn={handleNextPage} text="NEXT" />
+      {props.charactersList && props.charactersList.length >= 20 ? (
+        <div className={styles.btnContainer}>
+          <Button onClickBtn={handlePrevPage} text="PREVIOUS" />
+          <Button onClickBtn={handleNextPage} text="NEXT" />
+        </div>
+      ) : (
+        <></>
+      )}
+      <div className={styles.searchContainer}>
+        <Input
+          placeholder="Enter a character name"
+          width={width >= 768 ? "500px" : "90%"}
+          onChangeInput={handleInput}
+        />
+        <Button onClickBtn={handleSearch} text="SEARCH" />
       </div>
-      <div className={styles.cardsContainer}>
-        {props.charactersList &&
-          props.charactersList.map((char) => {
-            return <CharactersCard char={char} key={char.id} />;
-          })}
-      </div>
+      {props.isLoading ? (
+        <div>OI</div>
+      ) : (
+        <div className={styles.cardsContainer}>
+          {props.charactersList &&
+            props.charactersList.map((char) => {
+              return <CharactersCard char={char} key={char.id} />;
+            })}
+        </div>
+      )}
     </div>
   );
 }
@@ -48,12 +82,15 @@ const mapStateToProps = (state) => ({
   isLoading: state.characters.isLoading,
   next: state.characters.next,
   prev: state.characters.prev,
+  inputData: state.inputData,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       getCharactersList,
+      changeInput,
+      getCharactersByName,
     },
     dispatch
   );

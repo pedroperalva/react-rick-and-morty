@@ -1,6 +1,6 @@
 .imagem {
   border-radius: 20px 0px 0px 20px;
-  width: 200px;
+  width: 230px;
   margin-right: 30px;
 }
 p {
@@ -18,16 +18,16 @@ p {
   color: #000;
 }
 .cardContainer {
-  border: 3px solid #00b5cc;
   display: flex;
   width: 530px;
-  height: 230px;
-  background-color: #b2df28;
+  height: 250px;
   border-radius: 20px;
-}
-.cardContainer:hover {
   background-color: #00b5cc;
   border: 3px solid #b2df28;
+}
+.cardContainer:hover {
+  border: 3px solid #00b5cc;
+  background-color: #b2df28;
 }
 .status {
   height: 0.7rem;
@@ -41,4 +41,24 @@ p {
   display: flex;
   align-items: center;
   color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .cardContainer {
+    flex-direction: column;
+    height: 530px;
+    width: 250px;
+  }
+  .imagem {
+    width: 100%;
+    border-radius: 20px 20px 0px 0px;
+    margin-right: 0;
+  }
+  .textsContainer {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .name {
+    text-align: center;
+  }
 }

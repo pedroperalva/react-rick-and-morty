@@ -6,3 +6,12 @@ export const getCharactersList = (path) => ({
 export const setIsLoadingChars = () => ({
   type: "IS_LOADING",
 });
+
+export const changeInput = (event) => ({
+  type: "CHANGE_INPUT",
+  payload: event,
+});
+
+export const getCharactersByName = () => ({
+  type: "GET_CHARACTERS_BY_NAME_SAGA",
+});

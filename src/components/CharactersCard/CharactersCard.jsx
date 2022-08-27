@@ -21,7 +21,7 @@ function CharactersCard(props) {
   return (
     <div className={styles.cardContainer}>
       <img src={props.char.image} alt="char-url" className={styles.imagem} />
-      <div>
+      <div className={styles.textsContainer}>
         <p className={styles.name}>{props.char.name}</p>
         <p className={styles.statusName}>
           <span className={styles.titles}>Status: </span>

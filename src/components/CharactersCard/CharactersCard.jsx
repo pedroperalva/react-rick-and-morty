@@ -3,20 +3,20 @@ import { useEffect, useState } from "react";
 
 function CharactersCard(props) {
   const [color, setColor] = useState("");
+  const status = props.char.status;
 
   useEffect(() => {
+    const statusColor = () => {
+      if (status === "Alive") {
+        return setColor("green");
+      } else if (status === "Dead") {
+        return setColor("red");
+      } else {
+        return setColor("gray");
+      }
+    };
     statusColor();
-    // eslint-disable-next-line
-  }, []);
-  const statusColor = () => {
-    if (props.char.status === "Alive") {
-      return setColor("green");
-    } else if (props.char.status === "Dead") {
-      return setColor("red");
-    } else {
-      return setColor("gray");
-    }
-  };
+  }, [status]);
 
   return (
     <div className={styles.cardContainer}>
@@ -29,7 +29,7 @@ function CharactersCard(props) {
             className={styles.status}
             style={{ backgroundColor: color }}
           ></span>
-          {props.char.status}
+          {status}
         </p>
         <p className={styles.texts}>
           <span className={styles.titles}>Gender: </span>

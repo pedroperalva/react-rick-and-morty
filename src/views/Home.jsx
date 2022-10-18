@@ -13,10 +13,10 @@ import Input from "../components/Input/Input";
 import useWindowDimensions from "../composables/useWindowDimensions";
 
 function Home(props) {
+  const getList = props.getCharactersList;
   useEffect(() => {
-    props.getCharactersList();
-    // eslint-disable-next-line
-  }, []);
+    getList();
+  }, [getList]);
 
   const { width } = useWindowDimensions();
 
@@ -24,12 +24,12 @@ function Home(props) {
     console.log(props.next);
     const path = props.next.split("/");
     console.log(path);
-    props.getCharactersList(path[path.length - 1]);
+    getList(path[path.length - 1]);
   };
 
   const handlePrevPage = () => {
     const path = props.prev.split("/");
-    props.getCharactersList(path[path.length - 1]);
+    getList(path[path.length - 1]);
   };
 
   const handleInput = (e) => {
